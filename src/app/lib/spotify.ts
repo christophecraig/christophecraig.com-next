@@ -20,7 +20,7 @@ const getAccessToken = async () => {
 
 export const topTracks = async () => {
     const { access_token } = await getAccessToken();
-
+    console.log(access_token);
     return fetch("https://api.spotify.com/v1/me/top/tracks", {
         headers: {
             Authorization: `Bearer ${access_token}`,
@@ -47,4 +47,17 @@ export const currentlyPlayingSong = async () => {
         },
     });
 };
+
+export const getArtist = async (id: string) => {
+    const { access_token } = await getAccessToken();
+    console.log(access_token);
+
+    console.log(`https://api.spotify.com/v1/artists/${id}`)
+
+    return fetch(`https://api.spotify.com/v1/artists/${id}`, {
+        headers: {
+            Authorization: `Bearer ${access_token}`,
+        },
+    });
+}
 
