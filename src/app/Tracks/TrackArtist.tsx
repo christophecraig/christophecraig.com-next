@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
 import { Artist, SimplifiedArtist } from "@spotify/web-api-ts-sdk";
@@ -7,6 +6,7 @@ import useSWR, { type SWRResponse } from "swr";
 import { fetcher } from "../utils/network";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { PersonIcon } from "@radix-ui/react-icons";
 
 interface TrackArtistProps extends React.HTMLAttributes<HTMLDivElement> {
   artist: SimplifiedArtist
@@ -29,10 +29,16 @@ const TrackArtist: React.FC<TrackArtistProps> = ({ artist, className, children }
             <p className="text-sm">
               {data?.genres?.join(', ')}
             </p>
-            <div className="flex items-center pt-2">
+            <div className="flex items-start pt-2">
               <Star/>{" "}
               <span className="text-xs text-muted-foreground">
                 {data?.popularity}
+              </span>
+            </div>
+            <div className="flex items-start pt-2">
+              <PersonIcon/>{" "}
+              <span className="text-xs text-muted-foreground">
+                {data?.followers?.total || 0}
               </span>
             </div>
           </div>

@@ -2,10 +2,11 @@
 import useSWR, { SWRResponse } from "swr";
 import { fetcher } from "./utils/network";
 import TracksList from "./Tracks/TracksList";
+import { LoginForm } from "@/components/LoginForm";
 export default function Home() {
 
   const {data, error, isLoading}: SWRResponse = useSWR('http://localhost:3000/api/top-tracks', fetcher);
-  if (error) {
+  if (error?.status === 401) {
     return (
       <LoginForm />
     )
