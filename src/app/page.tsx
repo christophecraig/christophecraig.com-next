@@ -5,7 +5,11 @@ import TracksList from "./Tracks/TracksList";
 export default function Home() {
 
   const {data, error, isLoading}: SWRResponse = useSWR('http://localhost:3000/api/top-tracks', fetcher);
-
+  if (error) {
+    return (
+      <LoginForm />
+    )
+  }
   return (
     <main className="container">
       <h1 className={`text-4xl`}>Top Tracks</h1>

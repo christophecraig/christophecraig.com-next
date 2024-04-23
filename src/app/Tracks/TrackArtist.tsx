@@ -5,18 +5,18 @@ import { Artist, SimplifiedArtist } from "@spotify/web-api-ts-sdk";
 import { Star } from "lucide-react";
 import useSWR, { type SWRResponse } from "swr";
 import { fetcher } from "../utils/network";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 
-interface TrackArtistProps {
+interface TrackArtistProps extends React.HTMLAttributes<HTMLDivElement> {
   artist: SimplifiedArtist
 }
 
-const TrackArtist: React.FC<TrackArtistProps> = ({ artist }) => {
-
+const TrackArtist: React.FC<TrackArtistProps> = ({ artist, className, children }) => {
   const {data, error, isLoading}: SWRResponse<Artist, any, any> = useSWR(`http://localhost:3000/api/artists/${artist?.id}`, fetcher);  return (
     <HoverCard>
-
       <HoverCardTrigger asChild>
-        <Button variant="link">{artist?.name}</Button>
+        <Link href="#" className={cn(className, 'hover:underline')}>{children}</Link>
       </HoverCardTrigger>
       <HoverCardContent className="w-80">
         <div className="flex justify-start space-x-4">
@@ -37,7 +37,8 @@ const TrackArtist: React.FC<TrackArtistProps> = ({ artist }) => {
             </div>
           </div>
         </div>
-      </HoverCardContent></HoverCard>
+      </HoverCardContent>
+    </HoverCard>
   );
 }
 
