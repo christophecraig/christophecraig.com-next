@@ -5,7 +5,7 @@ import TracksList from "./Tracks/TracksList";
 import { LoginForm } from "@/components/LoginForm";
 export default function Home() {
 
-  const {data, error, isLoading}: SWRResponse = useSWR('http://localhost:3000/api/top-tracks', fetcher);
+  const {data, error, isLoading}: SWRResponse = useSWR(`${process.env.NEXT_PUBLIC_BASE_URL}/api/top-tracks`, fetcher);
   if (error?.status === 401) {
     return (
       <LoginForm />

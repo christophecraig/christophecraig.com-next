@@ -13,7 +13,7 @@ interface TrackArtistProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const TrackArtist: React.FC<TrackArtistProps> = ({ artist, className, children }) => {
-  const {data, error, isLoading}: SWRResponse<Artist, any, any> = useSWR(`http://localhost:3000/api/artists/${artist?.id}`, fetcher);  return (
+  const {data, error, isLoading}: SWRResponse<Artist, any, any> = useSWR(`${process.env.NEXT_PUBLIC_BASE_URL}/api/artists/${artist?.id}`, fetcher);  return (
     <HoverCard>
       <HoverCardTrigger asChild>
         <Link href="#" className={cn(className, 'hover:underline')}>{children}</Link>
